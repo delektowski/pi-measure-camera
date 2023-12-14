@@ -7,11 +7,11 @@ import requests
 load_dotenv()
 server_url = getenv('URL')
 server_port= getenv('PORT')
-server_user= getenv('USER')
+server_user= getenv('SERVER_USER')
 server_path_to_pics= getenv('PATH_TO_PICS')
 
 remote={"host": server_url, "user": server_user, "path": server_path_to_pics}
-gql_url=f"{server_url}:{server_port}"
+gql_url=f"http://{server_url}:{server_port}"
 
 def send_img_data(img_name:str)-> None:
     variables = {
