@@ -5,10 +5,10 @@ from dotenv import load_dotenv
 import requests
 
 load_dotenv()
-server_url = os.getenv('URL')
-server_port= os.getenv('PORT')
-server_user= os.getenv('USER')
-server_path_to_pics= os.getenv('PATH_TO_PICS')
+server_url = getenv('URL')
+server_port= getenv('PORT')
+server_user= getenv('USER')
+server_path_to_pics= getenv('PATH_TO_PICS')
 
 remote={"host": server_url, "user": server_user, "path": server_path_to_pics}
 gql_url=f"{server_url}:{server_port}"
