@@ -56,4 +56,4 @@ def send_measures(*, temperature, pressure, humidity, measurementDate):
     time.sleep(25)
     get_measures()
 
-get_measures()
+

@@ -1,4 +1,5 @@
 from time import sleep
+from measure import get_measures
 from picamera import PiCamera
 from datetime import datetime
 from send_img import send_img, send_img_data
@@ -39,5 +40,6 @@ def start_camera():
 
 if __name__ == "__main__":
     start_camera()
+    get_measures()
 
 
