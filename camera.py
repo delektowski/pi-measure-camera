@@ -22,7 +22,7 @@ async def make_photo():
         print("Photo has been made")
         send_img(path_tmp, img_name, current_date)
         await asyncio.sleep(5)
-        make_photo()
+        await make_photo()
 
     except:
         sleep(2)
@@ -40,7 +40,7 @@ async def start_camera():
 
     except:
         asyncio.sleep(2)
-        start_camera()
+        await start_camera()
 
 
 async def main() -> None:
