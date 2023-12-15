@@ -3,6 +3,7 @@ from scp import SCPClient
 from os import remove,getenv
 from dotenv import load_dotenv
 import requests
+import asyncio
 
 load_dotenv()
 server_url = getenv('URL')
@@ -30,7 +31,7 @@ def send_img_data(img_name:str)-> None:
     response = requests.post(url=gql_url, json={"query": body, "variables": variables})
     print(response.json())
 
-def send_img(path_tmp: str, img_name: str, current_date: str)-> None:
+async def send_img(path_tmp: str, img_name: str, current_date: str)-> None:
     img_path = path_tmp + img_name
     try:
         ssh = SSHClient()
@@ -45,7 +46,7 @@ def send_img(path_tmp: str, img_name: str, current_date: str)-> None:
 
     except Exception as e:
         print("Scp send error", e)
-        sleep(2) 
+        await asyncio.sleep(2) 
         send_img(img_path)
 
 def remove_img_from_tmp(img_path:str)-> None:

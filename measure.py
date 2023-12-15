@@ -4,6 +4,7 @@ import requests
 import time
 import os
 from dotenv import load_dotenv
+import asyncio
 
 load_dotenv()
 port = 1
@@ -13,7 +14,7 @@ calibration_params = bme280.load_calibration_params(bus, address)
 server_url = os.getenv('URL')
 server_port= os.getenv('PORT')
 
-def get_measures():
+async def get_measures():
     calibration_params = bme280.load_calibration_params(bus, address)
     data = bme280.sample(bus, address, calibration_params)
 
@@ -25,7 +26,7 @@ def get_measures():
     )
 
 
-def send_measures(*, temperature, pressure, humidity, measurementDate):
+async def send_measures(*, temperature, pressure, humidity, measurementDate):
     url = f"{server_url}:{server_port}"
     print("temperature: ", temperature)
     variables = {
@@ -53,7 +54,7 @@ def send_measures(*, temperature, pressure, humidity, measurementDate):
     print(url)
     response = requests.post(url=f"http://{url}", json={"query": body, "variables": variables})
     print(response.json())
-    time.sleep(25)
+    await asyncio.sleep(25)
     get_measures()
 
 
