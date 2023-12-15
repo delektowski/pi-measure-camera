@@ -18,7 +18,7 @@ async def get_measures():
     calibration_params = bme280.load_calibration_params(bus, address)
     data = bme280.sample(bus, address, calibration_params)
 
-    await send_measures(
+    send_measures(
         temperature=data.temperature,
         pressure=data.pressure,
         humidity=data.humidity,
@@ -55,6 +55,6 @@ async def send_measures(*, temperature, pressure, humidity, measurementDate):
     response = requests.post(url=f"http://{url}", json={"query": body, "variables": variables})
     print(response.json())
     await asyncio.sleep(25)
-    await get_measures()
+    get_measures()
 
 asyncio.run(get_measures())
