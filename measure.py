@@ -50,8 +50,8 @@ def send_measures(*, temperature, pressure, humidity, measurementDate):
         }
     }
     """
-
-    response = requests.post(url=url, json={"query": body, "variables": variables})
+    print(url)
+    response = requests.post(url=f"http://{url}", json={"query": body, "variables": variables})
     print(response.json())
     time.sleep(25)
     get_measures()
