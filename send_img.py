@@ -28,8 +28,8 @@ async def send_img_data(img_name:str)-> None:
         }
     """
 
-    response = await requests.post(url=f"http://{gql_url}", json={"query": body, "variables": variables})
-    print(response.json())
+    # response = await requests.post(url=f"http://{gql_url}", json={"query": body, "variables": variables})
+    # print(response.json())
 
 async def send_img(path_tmp: str, img_name: str, current_date: str)-> None:
     img_path = path_tmp + img_name
