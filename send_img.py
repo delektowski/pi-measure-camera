@@ -44,7 +44,7 @@ async def send_img(path_tmp: str, img_name: str, current_date: str) -> None:
         scp = SCPClient(ssh.get_transport())
         scp.put(img_path, remote_path=remote["path"])
         print("Photo has been sent")
-        remove_img_from_tmp(img_path)
+        await remove_img_from_tmp(img_path)
         await send_img_data(current_date)
 
     except Exception as err:
