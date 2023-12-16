@@ -1,7 +1,6 @@
 import smbus2
 import bme280
 import requests
-import time
 import os
 from dotenv import load_dotenv
 import asyncio
@@ -18,7 +17,7 @@ async def get_measures():
     calibration_params = bme280.load_calibration_params(bus, address)
     data = bme280.sample(bus, address, calibration_params)
 
-    send_measures(
+    await send_measures(
         temperature=data.temperature,
         pressure=data.pressure,
         humidity=data.humidity,
@@ -52,9 +51,9 @@ async def send_measures(*, temperature, pressure, humidity, measurementDate):
     }
     """
     print(url)
-    response = requests.post(url=f"http://{url}", json={"query": body, "variables": variables})
+    response = await requests.post(url=f"http://{url}", json={"query": body, "variables": variables})
     print(response.json())
     await asyncio.sleep(25)
-    get_measures()
+    await get_measures()
 
-asyncio.run(get_measures())
+
