@@ -52,7 +52,7 @@ async def send_measures(*, temperature, pressure, humidity, measurementDate):
             }
         }
         """
-        response = await requests.post(
+        response = requests.post(
             url=f"http://{url}", json={"query": body, "variables": variables}
         )
         print(response.json())
