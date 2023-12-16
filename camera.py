@@ -44,12 +44,23 @@ async def start_camera():
         await start_camera()
 
 
+async def cleanup():
+    # Add cleanup steps here, e.g., stopping the camera preview
+    camera.stop_preview()
+    await main()
+
 async def main() -> None:
     task_camera = asyncio.create_task(start_camera())
     task_measures = asyncio.create_task(get_measures())
 
-    await task_camera
-    await task_measures
+    try:
+        await task_camera
+        await task_measures
+    except asyncio.CancelledError:
+        # Handle the cancellation of tasks (e.g., during cleanup)
+        pass
+    finally:
+        await cleanup()
 
 
 if __name__ == "__main__":
