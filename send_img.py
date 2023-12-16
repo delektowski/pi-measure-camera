@@ -12,7 +12,7 @@ server_user= getenv('SERVER_USER')
 server_path_to_pics= getenv('PATH_TO_PICS')
 
 remote={"host": server_url, "user": server_user, "path": server_path_to_pics}
-gql_url=f"http://{server_url}:{server_port}"
+gql_url = f"{server_url}:{server_port}"
 
 async def send_img_data(img_name:str)-> None:
     variables = {
@@ -28,7 +28,7 @@ async def send_img_data(img_name:str)-> None:
         }
     """
 
-    response = await requests.post(url=gql_url, json={"query": body, "variables": variables})
+    response = await requests.post(url=f"http://{gql_url}", json={"query": body, "variables": variables})
     print(response.json())
 
 async def send_img(path_tmp: str, img_name: str, current_date: str)-> None:
@@ -41,7 +41,6 @@ async def send_img(path_tmp: str, img_name: str, current_date: str)-> None:
         # scp = SCPClient(ssh.get_transport())
         # scp.put(img_path, remote_path=remote["path"])
         # print("Photo has been sent")
-        # scp.close()
         await asyncio.sleep(2) 
         await send_img_data(current_date)
         await remove_img_from_tmp(img_path)

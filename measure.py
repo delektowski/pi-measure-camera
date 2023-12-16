@@ -50,6 +50,7 @@ async def send_measures(*, temperature, pressure, humidity, measurementDate):
         }
     }
     """
+    await asyncio.sleep(2) 
     response = await requests.post(url=f"http://{url}", json={"query": body, "variables": variables})
     print(response.json())
     await asyncio.sleep(25)
