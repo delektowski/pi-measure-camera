@@ -34,14 +34,14 @@ async def send_img_data(img_name:str)-> None:
 async def send_img(path_tmp: str, img_name: str, current_date: str)-> None:
     img_path = path_tmp + img_name
     try:
-        ssh = SSHClient()
-        ssh.load_system_host_keys()
-        ssh.set_missing_host_key_policy(AutoAddPolicy())
-        ssh.connect(hostname=remote["host"], username=remote["user"])
-        scp = SCPClient(ssh.get_transport())
-        scp.put(img_path, remote_path=remote["path"])
-        print("Photo has been sent")
-        scp.close()
+        # ssh = SSHClient()
+        # ssh.load_system_host_keys()
+        # ssh.set_missing_host_key_policy(AutoAddPolicy())
+        # ssh.connect(hostname=remote["host"], username=remote["user"])
+        # scp = SCPClient(ssh.get_transport())
+        # scp.put(img_path, remote_path=remote["path"])
+        # print("Photo has been sent")
+        # scp.close()
         await asyncio.sleep(2) 
         await send_img_data(current_date)
         await remove_img_from_tmp(img_path)
