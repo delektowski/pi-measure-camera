@@ -39,7 +39,7 @@ async def start_camera():
         await make_photo()
 
     except:
-        asyncio.sleep(2)
+        await asyncio.sleep(2)
         await start_camera()
 
 
