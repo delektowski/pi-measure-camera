@@ -2,7 +2,7 @@ from time import sleep
 from measure import get_measures
 from picamera import PiCamera
 from datetime import datetime
-from send_img import send_img, send_img_data
+from send_img import send_img
 import asyncio
 
 camera = PiCamera()
@@ -21,7 +21,7 @@ async def make_photo():
         camera.capture(path_tmp + img_name, resize=(640, 480))
         print("Photo has been made")
         await send_img(path_tmp, img_name, current_date)
-        await asyncio.sleep(5)
+        await asyncio.sleep(3)
         await make_photo()
 
     except:
