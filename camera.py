@@ -19,7 +19,7 @@ async def make_photo():
         img_name = f"img-{current_date}.jpg"
         path_tmp = "tmp/"
         camera.capture(path_tmp + img_name, resize=(640, 480))
-        print("Photo has been made")
+        print("Photo has been made.")
         await send_img(path_tmp, img_name, current_date)
         await asyncio.sleep(3)
         await make_photo()
@@ -36,6 +36,7 @@ async def start_camera():
         camera.start_preview()
         # Camera warm-up time
         await asyncio.sleep(2)
+        print("Camera has been turned on.")
         await make_photo()
 
     except:

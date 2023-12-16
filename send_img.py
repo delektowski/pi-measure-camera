@@ -43,7 +43,7 @@ async def send_img(path_tmp: str, img_name: str, current_date: str) -> None:
         ssh.connect(hostname=remote["host"], username=remote["user"])
         scp = SCPClient(ssh.get_transport())
         scp.put(img_path, remote_path=remote["path"])
-        print("Photo has been sent")
+        print("Photo has been sent.")
         await remove_img_from_tmp(img_path)
         await send_img_data(current_date)
 
@@ -56,9 +56,8 @@ async def send_img(path_tmp: str, img_name: str, current_date: str) -> None:
 async def remove_img_from_tmp(img_path: str) -> None:
     try:
         remove(img_path)
-        print("File has been removed")
+        print("File has been removed.")
         await asyncio.sleep(1)
 
     except Exception as err:
         print("Remove file error: ", err)
-        print("File removal error")
