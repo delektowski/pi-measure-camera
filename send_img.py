@@ -45,8 +45,8 @@ async def send_img(path_tmp: str, img_name: str, current_date: str)-> None:
         await send_img_data(current_date)
         await remove_img_from_tmp(img_path)
 
-    except Exception as e:
-        print("Scp send error", e)
+    except Exception as err:
+        print("Scp send error: ", err)
         await asyncio.sleep(2) 
         await send_img(img_path)
 
