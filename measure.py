@@ -52,7 +52,7 @@ async def send_measures(*, temperature, pressure, humidity, measurementDate):
             }
         }
         """
-        await asyncio.sleep(2)
+        print("koza: ",f"http://{url}")
         response = await requests.post(
             url=f"http://{url}", json={"query": body, "variables": variables}
         )
