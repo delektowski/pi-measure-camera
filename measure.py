@@ -56,7 +56,7 @@ async def send_measures(*, temperature, pressure, humidity, measurementDate):
             url=f"http://{url}", json={"query": body, "variables": variables}
         )
         print(response.json())
-        await asyncio.sleep(25)
+        await asyncio.sleep(1800)
         await get_measures()
     except Exception as err:
         print("Send measure error: ", err)
