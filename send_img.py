@@ -55,5 +55,6 @@ async def remove_img_from_tmp(img_path:str)-> None:
        await remove(img_path) 
        print("File has been removed")
        
-    except:
+    except Exception as err:
+       print("Remove file error: ", err)
        print("File removal error")  
