@@ -50,9 +50,9 @@ async def send_img(path_tmp: str, img_name: str, current_date: str)-> None:
         await asyncio.sleep(2) 
         await send_img(img_path)
 
-async def remove_img_from_tmp(img_path:str)-> None:
+def remove_img_from_tmp(img_path:str)-> None:
     try:
-       await remove(img_path) 
+       remove(img_path) 
        print("File has been removed")
        
     except Exception as err:
