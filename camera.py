@@ -21,7 +21,7 @@ async def make_photo():
         camera.capture(path_tmp + img_name, resize=(640, 480))
         print("Photo has been made.")
         await send_img(path_tmp, img_name, current_date)
-        await asyncio.sleep(5)
+        await asyncio.sleep(3)
         await make_photo()
 
     except:
