@@ -14,7 +14,7 @@ server_path_to_pics = getenv("PATH_TO_PICS")
 remote = {"host": server_url, "user": server_user, "path": server_path_to_pics}
 gql_url = f"{server_url}:{server_port}"
 
-semaphore = asyncio.Semaphore(2) 
+semaphore = asyncio.Semaphore(4) 
 
 
 async def send_img_data(img_name: str) -> None:
