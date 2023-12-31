@@ -4,6 +4,9 @@ from picamera import PiCamera
 from datetime import datetime
 from send_img import send_img
 import asyncio
+import logging
+
+logging.basicConfig(filename='./logs/make_photo.log', encoding='utf-8', level=logging.DEBUG)
 
 camera = PiCamera()
 
@@ -20,11 +23,13 @@ async def make_photo():
         path_tmp = "tmp/"
         camera.capture(path_tmp + img_name, resize=(640, 480))
         print("Photo has been made.")
+        logging.debug('This message should go to the log file')
         await send_img(path_tmp, img_name, current_date)
         await asyncio.sleep(3)
         await make_photo()
 
     except:
+        logging.error()('LOG ERROR in make_photo: ')
         await asyncio.sleep(2)
         await make_photo()
 
