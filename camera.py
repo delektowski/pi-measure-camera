@@ -28,8 +28,8 @@ async def make_photo():
         await asyncio.sleep(3)
         await make_photo()
 
-    except:
-        logging.error()('LOG ERROR in make_photo: ')
+    except Exception as err:
+        logging.error()(f'LOG ERROR in make_photo: {err}')
         await asyncio.sleep(2)
         await make_photo()
 
