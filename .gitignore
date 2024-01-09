@@ -4,3 +4,4 @@ __pycache__/
 *.jpg
 test.py
 *.log
+.DS_Store
