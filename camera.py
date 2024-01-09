@@ -25,7 +25,6 @@ async def make_photo():
         print("Photo has been made.")
         logging.debug('This message should go to the log file')
         await send_img(path_tmp, img_name, current_date)
-        await asyncio.sleep(3)
         await make_photo()
 
     except Exception as err:
