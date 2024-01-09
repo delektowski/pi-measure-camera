@@ -6,7 +6,9 @@ from send_img import send_img
 import asyncio
 import logging
 
-logging.basicConfig(filename='./logs/make_photo.log', encoding='utf-8', level=logging.DEBUG)
+logging.basicConfig(
+    filename="./logs/make_photo.log", encoding="utf-8", level=logging.DEBUG
+)
 
 camera = PiCamera()
 
@@ -23,12 +25,12 @@ async def make_photo():
         path_tmp = "tmp/"
         camera.capture(path_tmp + img_name, resize=(640, 480))
         print("Photo has been made.")
-        logging.debug('This message should go to the log file')
+        logging.debug("This message should go to the log file")
         await send_img(path_tmp, img_name, current_date)
         await make_photo()
 
     except Exception as err:
-        logging.error()(f'LOG ERROR in make_photo: {err}')
+        logging.error()(f"LOG ERROR in make_photo: {err}")
         await asyncio.sleep(2)
         await make_photo()
 
@@ -52,6 +54,7 @@ async def cleanup():
     # Add cleanup steps here, e.g., stopping the camera preview
     camera.stop_preview()
     await main()
+
 
 async def main() -> None:
     task_camera = asyncio.create_task(start_camera())
