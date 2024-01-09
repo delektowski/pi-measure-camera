@@ -11,10 +11,9 @@ logging.basicConfig(filename='./logs/errors.log', encoding='utf-8', level=loggin
 load_dotenv()
 server_url = getenv("URL")
 server_port = getenv("PORT")
-server_user = getenv("SERVER_USER")
 server_path_to_pics = getenv("PATH_TO_PICS")
 
-remote = {"host": server_url, "user": server_user, "path": server_path_to_pics}
+
 gql_url = f"{server_url}:{server_port}"
 
 
@@ -42,16 +41,14 @@ async def send_img(path_tmp: str, img_name: str, current_date: str, attempt = 0)
     img_path = path_tmp + img_name
    
     try:
-        async with asyncssh.connect(remote['host'], username=remote['user']) as conn:
-            async with conn.scp as sftp:
-                await sftp.put(img_path, remote["path"])
-                await asyncio.sleep(2)
-                print("Photo has been sent.")
-                await remove_img_from_tmp(path_tmp,img_name)
-                await send_img_data(current_date)
+        send_img_process = await asyncio.create_subprocess_exec('scp', img_path, server_path_to_pics)
+        await asyncio.sleep(2)
+        print("Photo has been sent.")
+        await remove_img_from_tmp(path_tmp,img_name)
+        await send_img_data(current_date)
     
     except Exception as err:
-        print("Sftp send error: ", err)
+        print("Img send error: ", err)
         await asyncio.sleep(2)
         logging.error()('LOG ERROR in send_img: ')
         if attempt < 10:

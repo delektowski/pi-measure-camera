@@ -17,7 +17,7 @@ server_port = os.getenv("PORT")
 async def get_measures():
     calibration_params = bme280.load_calibration_params(bus, address)
     data = bme280.sample(bus, address, calibration_params)
-
+    
     await send_measures(
         temperature=data.temperature,
         pressure=data.pressure,
@@ -68,3 +68,6 @@ async def send_measures(*, temperature, pressure, humidity, measurementDate):
             humidity=humidity,
             measurementDate=measurementDate,
         )
+
+if __name__ == "__main__":
+    asyncio.run(get_measures())
